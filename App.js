@@ -1,62 +1,21 @@
 import React from "react";
-import { AsyncStorage, StyleSheet, Text, View } from "react-native";
-import Login from "./components/login";
+import { StyleSheet, View } from "react-native";
+import { Provider } from "react-redux";
+import { applyMiddleware, createStore } from "redux";
+import thunk from "redux-thunk";
+import rootReducer from "./src/reducers/root_reducer";
+import Base from "./src/base";
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default class App extends React.Component {
-  login = (email, password) => {
-    const baseUrl = "https://bounce-api.herokuapp.com";
-    fetch(`${baseUrl}/api/v1/login`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify({
-        auth: {
-          email,
-          password
-        }
-      })
-    }).then(resp => {
-      return resp.json();
-    }).then(responseJson => {
-      console.log(responseJson);
-      AsyncStorage.setItem("jwt", responseJson.jwt)
-        .then(() => {
-          this.setState({ loggedIn: true, jwt: responseJson.jwt });
-        });
-    }).catch((error) => {
-
-    });
-  };
-
-  componentDidMount() {
-    AsyncStorage.getItem("jwt").then((jwt) => {
-      if (jwt) {
-        this.setState({
-          jwt,
-          loggedIn: true
-        });
-      }
-    });
-  }
-
   render() {
-    let view;
-    if (this.state.loggedIn) {
-      view = <Text>Bounce App</Text>;
-    } else {
-      view = <Login login={this.login}/>;
-    }
-
-    return <View style={styles.container}>
-      {view}
-    </View>;
+    return <Provider store={store}>
+      <View style={styles.container}>
+        <Base/>
+      </View>
+    </Provider>;
   }
-
-  state = {
-    loggedIn: false,
-    jwt: null
-  };
 }
 
 const styles = StyleSheet.create({

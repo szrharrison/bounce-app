@@ -1,9 +1,11 @@
 import React from "react";
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { connect } from "react-redux";
 import * as PropTypes from "prop-types";
+import { Button, StyleSheet, TextInput, View } from "react-native";
+import login from "./actions/login";
 
 
-export default class Login extends React.Component {
+export class Login extends React.Component {
   static propTypes = {
     login: PropTypes.func.isRequired,
   };
@@ -61,3 +63,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default connect(null, { login })(Login);
