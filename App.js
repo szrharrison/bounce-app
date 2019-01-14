@@ -1,14 +1,13 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
-import thunk from "redux-thunk";
-import rootReducer from "./src/reducers/root_reducer";
-import Base from "./src/base";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import AuthFlow from "./src/components/navigation/auth_flow";
+import AuthLoading from "./src/components/screens/auth_loading";
+import Base from "./src/components/screens/base";
+import store from "./src/services/redux_store";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
-
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return <Provider store={store}>
       <View style={styles.container}>
@@ -26,3 +25,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+// noinspection JSUnusedGlobalSymbols
+export default createAppContainer(createSwitchNavigator(
+  {
+    AuthLoading,
+    App,
+    Auth: AuthFlow,
+  },
+  {
+    initialRouteName: "AuthLoading",
+  }
+));

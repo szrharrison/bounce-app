@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import getSession from "../../selectors/get_session";
+import getSession from "./get_session";
 
 const getIsLoggedIn = createSelector([
   getSession
