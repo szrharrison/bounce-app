@@ -7,7 +7,9 @@ import createUser from "../../services/actions/create_user";
 import styles from "../../services/styles";
 
 class CreateUser extends Component {
-  static navigationOptions = {};
+  static navigationOptions = {
+    header: null
+  };
 
   static propTypes = {
     createUser: PropTypes.func.isRequired,
@@ -22,7 +24,9 @@ class CreateUser extends Component {
   };
 
   submit = () => {
-    this.props.createUser(this.state.firstName, this.state.lastName);
+    this.props.createUser(this.state.firstName, this.state.lastName).then(() => {
+      this.navigation.navigate("App")
+    });
   };
 
   focusOnLastNameInput = () => {

@@ -7,14 +7,13 @@ import AuthLoading from "./src/components/screens/auth_loading";
 import Base from "./src/components/screens/base";
 import store from "./src/services/redux_store";
 
-class App extends React.Component {
-  render() {
-    return <Provider store={store}>
-      <View style={styles.container}>
-        <Base/>
-      </View>
-    </Provider>;
-  }
+
+function App(props) {
+  return <Provider store={store}>
+    <View style={styles.container}>
+      <Base navigation={props.navigation}/>
+    </View>
+  </Provider>;
 }
 
 const styles = StyleSheet.create({

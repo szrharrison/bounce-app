@@ -9,7 +9,7 @@ import styles from "../../services/styles";
 
 export class Login extends React.Component {
   static navigationOptions = {
-    title: 'Login',
+    title: "Login",
   };
 
   static propTypes = {
@@ -25,7 +25,9 @@ export class Login extends React.Component {
   };
 
   login = () => {
-    this.props.login(this.state.email, this.state.password);
+    this.props.login(this.state.email, this.state.password).then(() => {
+      this.props.navigation.navigate("App");
+    });
   };
 
   toSignUpScreen = () => {

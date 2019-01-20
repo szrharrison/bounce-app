@@ -6,7 +6,7 @@ const createUser = (firstName, lastName) => {
   return (dispatch, getState) => {
     const jwt = getJwt(getState(), {});
     return Api.createUser(firstName, lastName, jwt).then((userJson) => {
-      dispatch(userCreated(userJson.user.firstName, userJson.user.lastName));
+      dispatch(userCreated(userJson.user.first_name, userJson.user.last_name));
     });
   };
 };

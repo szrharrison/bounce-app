@@ -42,8 +42,8 @@ export default class Api {
       },
       body: JSON.stringify({
         user: {
-          firstName,
-          lastName
+          first_name: firstName,
+          last_name: lastName
         }
       })
     }).then(resp => resp.json())
@@ -62,7 +62,7 @@ export default class Api {
           name,
           importance,
           urgency,
-          dueDate
+          due_date: dueDate
         }
       })
     }).then(resp => resp.json())
@@ -87,16 +87,16 @@ export default class Api {
           name,
           importance,
           urgency,
-          dueDate,
-          easyStart
+          due_date: dueDate,
+          easy_start: easyStart
         }
       })
     }).then(resp => resp.json())
       .then(taskJson => taskJson.task);
   }
 
-  static getUser(userId, jwt) {
-    return fetch(`${API_BASE_URL}/api/v1/user/${userId}`, {
+  static getUser(jwt) {
+    return fetch(`${API_BASE_URL}/api/v1/user`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
