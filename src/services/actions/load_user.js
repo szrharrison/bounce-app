@@ -6,6 +6,7 @@ const loadUser = () => {
   return (dispatch, getState) => {
     const jwt = getJwt(getState(), {});
     return Api.getUser(jwt).then(user => {
+      console.log("Finished loading user:", user);
       dispatch(userLoaded(user.first_name, user.last_name));
     });
   };

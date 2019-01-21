@@ -5,6 +5,7 @@ import { AsyncStorage, Text, TouchableHighlight } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import getUser from "../../services/selectors/get_user";
 import loadUser from "../../services/actions/load_user";
+import loggedIn from "../../services/events/logged_in";
 import loggedOut from "../../services/events/logged_out";
 import styles from "../../services/styles";
 
@@ -12,6 +13,7 @@ import styles from "../../services/styles";
 class Base extends Component {
   static propTypes = {
     loadUser: PropTypes.func.isRequired,
+    loggedIn: PropTypes.func.isRequired,
     loggedOut: PropTypes.func.isRequired,
     user: PropTypes.shape({
       firstName: PropTypes.string,
@@ -26,7 +28,10 @@ class Base extends Component {
   };
 
   componentDidMount() {
-    this.props.loadUser();
+    AsyncStorage.getItem("jwt").then(jwt => {
+      this.props.loggedIn(jwt);
+      this.props.loadUser();
+    })
   }
 
   render() {
@@ -47,4 +52,4 @@ const mapStateToProps = (state, props) => ({
   user: getUser(state, props)
 });
 
-export default connect(mapStateToProps, { loadUser, loggedOut })(Base);
+export default connect(mapStateToProps, { loadUser, loggedIn, loggedOut })(Base);
