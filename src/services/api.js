@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "react-native-dotenv";
+import checkFetchStatus from "./check_fetch_status";
 
 export default class Api {
   static login(email, password) {
@@ -13,7 +14,7 @@ export default class Api {
           password
         }
       })
-    }).then(resp => resp.json())
+    }).then(checkFetchStatus)
       .then(jwtJson => jwtJson.jwt);
   }
 
@@ -29,7 +30,7 @@ export default class Api {
           password
         }
       })
-    }).then(resp => resp.json())
+    }).then(checkFetchStatus)
       .then(jwtJson => jwtJson.jwt);
   }
 
@@ -46,7 +47,7 @@ export default class Api {
           last_name: lastName
         }
       })
-    }).then(resp => resp.json())
+    }).then(checkFetchStatus)
       .then(userJson => userJson.user);
   }
 
@@ -65,7 +66,7 @@ export default class Api {
           due_date: dueDate
         }
       })
-    }).then(resp => resp.json())
+    }).then(checkFetchStatus)
       .then(projectJson => projectJson.project);
   }
 
@@ -91,7 +92,7 @@ export default class Api {
           easy_start: easyStart
         }
       })
-    }).then(resp => resp.json())
+    }).then(checkFetchStatus)
       .then(taskJson => taskJson.task);
   }
 
@@ -102,7 +103,7 @@ export default class Api {
         "Content-type": "application/json",
         "Authorization": `Bearer ${jwt}`
       }
-    }).then(resp => resp.json())
+    }).then(checkFetchStatus)
       .then(userJson => userJson.user);
   }
 
@@ -113,7 +114,7 @@ export default class Api {
         "Content-type": "application/json",
         "Authorization": `Bearer ${jwt}`
       }
-    }).then(resp => resp.json())
+    }).then(checkFetchStatus)
       .then(projectsJson => projectsJson.projects);
   }
 
@@ -124,7 +125,7 @@ export default class Api {
         "Content-type": "application/json",
         "Authorization": `Bearer ${jwt}`
       }
-    }).then(resp => resp.json())
+    }).then(checkFetchStatus)
       .then(tasksJson => tasksJson.tasks);
   }
 }

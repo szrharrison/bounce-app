@@ -3,14 +3,17 @@ import { Provider } from "react-redux";
 import store from "../../services/redux_store";
 
 function withProvider(ChildComponent) {
-  const returnComponent = (props) => <Provider store={store}>
-    <ChildComponent {...props}/>
-  </Provider>;
-  if (ChildComponent.navigationOptions) {
-    returnComponent.navigationOptions = ChildComponent.navigationOptions;
+  function ReturnComponent(props) {
+    return <Provider store={store}>
+      <ChildComponent {...props}/>
+    </Provider>;
   }
 
-  return returnComponent;
+  if (ChildComponent.navigationOptions) {
+    ReturnComponent.navigationOptions = ChildComponent.navigationOptions;
+  }
+
+  return ReturnComponent;
 }
 
 export default withProvider;
