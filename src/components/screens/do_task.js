@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as PropTypes from "prop-types";
-import { View } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import styles from "../../services/styles";
 
 class DoTask extends Component {
@@ -13,8 +13,8 @@ class DoTask extends Component {
   };
 
   render() {
-    return <View style={styles.container}>
-    </View>;
+    return <SafeAreaView style={styles.container}>
+    </SafeAreaView>;
   }
 }
 

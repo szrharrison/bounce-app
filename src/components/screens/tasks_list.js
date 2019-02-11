@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as PropTypes from "prop-types";
-import { View } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import Api from "../../services/api";
 import styles from "../../services/styles";
 
@@ -20,9 +20,8 @@ class TasksList extends Component {
   }
 
   render() {
-    return <View style={styles.container}>
-
-    </View>;
+    return <SafeAreaView style={styles.container}>
+    </SafeAreaView>;
   }
 }
 

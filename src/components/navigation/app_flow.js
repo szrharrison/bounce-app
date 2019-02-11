@@ -15,7 +15,7 @@ const AppFlow = createMaterialTopTabNavigator({
   tabBarPosition: "top",
   order: ["AddTask", "DoTask", "TasksList"],
   lazy: true,
-  swipeEnabled: true,
+  swipeEnabled: false,
   animationEnabled: true,
   initialRouteName: "AddTask",
   backBehavior: "none",
